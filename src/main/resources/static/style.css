@@ -1,0 +1,105 @@
+html, body{
+  height: 100%;
+  width:100%;
+  overflow: hidden;
+  margin: 0;
+  background: seagreen;
+}
+
+.grass, .sky, .road{
+  position: relative;
+}
+
+.sky{
+  height: 90%;
+  width: 80%;
+  /*background: seagreen;*/
+}
+
+.side{
+  position: fixed;
+  top : 0;
+  right: 0;
+  height: 100%;
+  width: 20%;
+  /*background: red;*/
+}
+
+.grass{
+  height: 30%;
+  background: seagreen;
+}
+
+.road{
+  height: 30%;
+  background: dimgrey;
+  box-sizing: border-box;
+  border-top: 10px solid grey;
+  border-bottom: 10px solid grey;
+  width: 100%;
+}
+
+.lines{
+  box-sizing: border-box;
+  border: 5px dashed #fff;
+  height: 0px;
+  width: 100%;
+  position: absolute;
+  top: 45%;
+}
+
+.button {
+  background-color: yellow; /* Green */
+  border: none;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {border-radius: 2px;}
+.button2 {border-radius: 4px;}
+.button3 {border-radius: 8px;}
+.button4 {border-radius: 12px;}
+.button5 {
+  border-radius: 50%;
+  position: relative;
+  bottom : 0;
+}
+
+.label {
+  color: white;
+  padding: 8px;
+}
+
+.success {
+  /*background-color: black;*/
+  font-size: 76px;
+  } /* Green */
+.info {
+  /*background-color: #2196F3;*/
+  font-size: 56px;
+  } /* Blue */
+.warning {
+  background-color: #ff9800;
+  font-size: 46px;
+  position: absolute;
+  bottom : 0;
+  right: 0;
+  } /* Orange */
+.danger {
+	/*background-color: #f44336;*/
+	font-size: 50px;
+	} /* Red */
+.other {background-color: #e7e7e7; color: black;} /* Gray */
+
+/*// ELEMENTS TO ANIMATE //*/
+
+
+
+/*// KEYFRAMES //*/
+

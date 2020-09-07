@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>
+  <title>Jumble word</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+ var puzzles; 
+ var charCount;
+ var dictCount;
+ var clickCount;
+ var score = 0;
+ var current = 0;
+ 
+ function addButton(len, letter)
+  {
+    var count =1;
+    var bid = 'A';
+    var temp;
+    for(var i=1; i<=len; i++)
+    {
+    	temp = "<button id=\"btn"+count+"\" class=\"button button5\">"+letter[count-1]+"</button>";
+    	$("#l1").append(temp);
+    	count++;
+    }
+  }
+ 
+ function removeButton()
+ {
+	 for(var i=1; i<=charCount; i++)
+		 {
+		   $("#btn"+i).remove();
+		 }
+ }
+ 
+  
+  function concatLabel(label, button)
+  {
+       
+       var l = $(label).text();
+       var r = $(button).text();
+       $(label).text(l.concat(r));
+       //$("#mainw").text("v1 + v2");
+  }
+  
+  function addBtnFunc()
+  {
+      for(var i=1; i<=charCount; i++)
+      {
+  	    $("#btn"+i).click(function(){
+    	concatLabel("#mainw", this);
+    	$(this).hide();
+    	clickCount++;
+  	  });
+      }
+  }
+  
+  
+  function loadDoc() {
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	puzzles = JSON.parse(this.responseText);
+	    	puzzles.forEach(function(element) { 
+	    		console.log(puzzles);
+	    		console.log(typeof puzzles);
+	    		});
+	    }
+	  };
+	  xhttp.open("GET", "http://localhost:8080/puzzles", false);
+	  xhttp.send();
+	}
+  
+  function loadPuzzle(ind)
+  {
+	 $("#mainw").text("");
+	 $("#hint").text(puzzles[ind].hint);
+	 clickCount = 0;
+	 
+	 var temp = puzzles[ind].jumbled;
+	 charCount = temp.length;
+	 addButton(charCount, temp);
+	 addBtnFunc();
+  }
+  
+  function check()
+  {
+	if(clickCount == charCount)
+  	{
+  		if($("#mainw").text() == puzzles[current].word)
+ 		    {
+ 		      score = score+5;
+ 		      $("#score").text("  :  "+score);
+ 		    }
+  	}
+	removeButton();
+  	current++;
+	loadPuzzle(current);
+  }
+
+$(document).ready(function(){
+  
+  var lbl1 = "<span id=\"mainw\"class=\"label success\">Success</span>";
+  
+  var lbl2 = "<span id=\"hint\"class=\"label warning\">Warning</span>";
+  
+  var brk = "<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>";
+  
+  var scrboard = "<span id=\"scoreboard\"class=\"label info\">Score</span>";
+  var scr = "<span id=\"score\"class=\"label danger\"> </span>";
+  
+  $("#l1").append(lbl1, lbl2, brk,brk, brk);
+  $("#s1").append(scrboard);
+  $("#s1").append(scr);
+  $("#check").click(check);
+  
+  loadDoc();
+  loadPuzzle(0);
+ 
+  
+});
+</script>
+<body>
+  <div id="l1" class="sky"></div>
+  <div id = "s1" class="side"></div>
+  <button class="button button1">Next</button>
+  <button class="button button1">Hint</button>
+  <button id="check" class="button button1">Check</button>
+  
+</body>

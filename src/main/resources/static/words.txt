@@ -1,0 +1,7 @@
+Ganga#A river
+Cricket#A game
+Apple#A fruit
+India#An Asian country
+Hyderabad#An Indian city
+Joker#Synonym of crown
+Haskell#A computer programming language 
